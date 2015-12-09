@@ -4,7 +4,8 @@
     // Declare app level module which depends on views, and components
     angular.module('myApp', [
     'ngRoute',
-    'myApp.home'                 // Newly add home module
+    'myApp.home',
+    'myApp.register'     // Newly added register route
     ])
     .config(['$routeProvider', function ($routeProvider) {
         // Set default view of app to home
