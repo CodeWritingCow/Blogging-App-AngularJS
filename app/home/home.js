@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    angular.module('myApp.home', ['ngRoute'])
+    angular.module('myApp.home', ['ngRoute', 'firebase'])
 
     // Declared route
     .config(['$routeProvider', function ($routeProvider) {
@@ -12,8 +12,31 @@
     }])
 
     // Home controller
-    .controller('HomeCtrl', [function () {
+    .controller('HomeCtrl', ['$scope', '$firebaseAuth', function ($scope, $firebaseAuth) {
 
-    }]);
+        var firebaseObj = new Firebase("https://blogging-app.firebaseio.com");
+        var loginObj = $firebaseAuth(firebaseObj);
+
+        $scope.SignIn = function (event) {
+            event.preventDefault(); // To prevent form refresh
+            var username = $scope.user.email;
+            var password = $scope.user.password;
+
+            loginObj.$authWithPassword({
+                email: username,
+                password: password
+            })
+            .then(function (user) {
+                // Success callback
+                console.log('Authentication successful');
+
+            }, function (error) {
+                // Failure callback
+                console.log('Authentication failure');
+            });
+        }
+
+
+    } ]);
 
 })();
