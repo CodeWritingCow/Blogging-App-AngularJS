@@ -8,7 +8,7 @@
         <link href="https://getbootstrap.com/examples/blog/blog.css" rel="stylesheet">
     </head>
 
-    <body>
+    <body ng-controller="AddPostCtrl">
 
         <div class="blog-masthead">
             <div class="container">
@@ -21,7 +21,7 @@
 
         <div class="container">
 
-            <form class="form-horizontal">
+            <form class="form-horizontal" ng-submit="AddPost()">
                 <fieldset>
 
                     <!-- Form Name -->
