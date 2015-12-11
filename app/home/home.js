@@ -9,10 +9,10 @@
             templateUrl: 'home/home.html',
             controller: 'HomeCtrl'
         });
-    } ])
+    }])
 
     // Home controller
-    .controller('HomeCtrl', ['$scope', '$location', '$firebaseAuth', function ($scope, $location, $firebaseAuth) {
+    .controller('HomeCtrl', ['$scope', '$location', 'CommonProp', '$firebaseAuth', function ($scope, $location, CommonProp, $firebaseAuth) {
 
         var firebaseObj = new Firebase("https://blogging-app.firebaseio.com");
         var loginObj = $firebaseAuth(firebaseObj);
@@ -30,13 +30,26 @@
                 // Success callback
                 console.log('Authentication successful');
                 $location.path('/welcome');
+                CommonProp.setUser(user.password.email);
             }, function (error) {
                 // Failure callback
                 console.log('Authentication failure');
             });
         }
 
+    }])
 
-    } ]);
+    .service('CommonProp', function () {
+        var user = '';
+
+        return {
+            getUser: function () {
+                return user;
+            },
+            setUser: function (value) {
+                user = value;
+            }
+        };
+    });
 
 })();

@@ -11,8 +11,8 @@
         });
     }])
 
-    .controller('WelcomeCtrl', ['$scope', function ($scope) {
-
+    .controller('WelcomeCtrl', ['$scope', 'CommonProp', function ($scope, CommonProp) {
+        $scope.username = CommonProp.getUser();
     }]);
 
 })();
