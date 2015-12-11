@@ -9,10 +9,10 @@
             templateUrl: 'home/home.html',
             controller: 'HomeCtrl'
         });
-    }])
+    } ])
 
     // Home controller
-    .controller('HomeCtrl', ['$scope', '$firebaseAuth', function ($scope, $firebaseAuth) {
+    .controller('HomeCtrl', ['$scope', '$location', '$firebaseAuth', function ($scope, $location, $firebaseAuth) {
 
         var firebaseObj = new Firebase("https://blogging-app.firebaseio.com");
         var loginObj = $firebaseAuth(firebaseObj);
@@ -29,7 +29,7 @@
             .then(function (user) {
                 // Success callback
                 console.log('Authentication successful');
-
+                $location.path('/welcome');
             }, function (error) {
                 // Failure callback
                 console.log('Authentication failure');
