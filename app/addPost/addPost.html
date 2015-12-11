@@ -31,7 +31,7 @@
                     <div class="form-group">
                         <label class="col-md-4 control-label" for="txtTitle">Title</label>
                         <div class="col-md-4">
-                            <input id="txtTitle" name="txtTitle" type="text" placeholder="placeholder" class="form-control input-md">
+                            <input id="txtTitle" name="txtTitle" class="form-control input-md" ng-model="article.title" type="text" placeholder="Title">
                         </div>
                     </div>
 
@@ -39,7 +39,7 @@
                     <div class="form-group">
                         <label class="col-md-4 control-label" for="txtPost">Post</label>
                         <div class="col-md-4">
-                            <textarea class="form-control" id="txtPost" name="txtPost"></textarea>
+                            <textarea id="txtPost" name="txtPost" class="form-control" ng-model="article.post"></textarea>
                         </div>
                     </div>
 
@@ -47,7 +47,7 @@
                     <div class="form-group">
                         <label class="col-md-4 control-label" for="singlebutton"></label>
                         <div class="col-md-4">
-                            <input id="singlebutton" name="singlebutton" class="btn btn-primary" type="submit" value="Publish" />
+                            <input id="singlebutton" name="singlebutton" class="btn btn-primary" ng-disabled="!article.title || !article.post" type="submit" value="Publish" />
                         </div>
                     </div>
 
