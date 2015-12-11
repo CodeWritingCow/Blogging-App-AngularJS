@@ -6,7 +6,8 @@
     'ngRoute',
     'myApp.home',
     'myApp.register',
-    'myApp.welcome'     // Newly added module
+    'myApp.welcome',
+    'myApp.addPost'     // Newly added module
     ])
     .config(['$routeProvider', function ($routeProvider) {
         // Set default view of app to home
