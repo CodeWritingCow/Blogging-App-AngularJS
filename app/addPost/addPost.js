@@ -11,17 +11,16 @@
         });
     }])
 
-        .controller('AddPostCtrl', ['$scope', '$firebase', function ($scope, $firebase) {
+        .controller('AddPostCtrl', ['$scope', function ($scope) {
 
             $scope.AddPost = function () {
                 
                 var firebaseObj = new Firebase('https://blogging-app.firebaseio.com');
-                var fb = $firebase(firebaseObj);
 
                 var title = $scope.article.title;
                 var post = $scope.article.post;
 
-                fb.$push({
+                firebaseObj.push({
                     title: title,
                     post: post
                 }).then(function (ref) {
