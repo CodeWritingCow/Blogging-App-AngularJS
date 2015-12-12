@@ -9,10 +9,14 @@
             templateUrl: 'welcome/welcome.html',
             controller: 'WelcomeCtrl'
         });
-    }])
+    } ])
 
-    .controller('WelcomeCtrl', ['$scope', 'CommonProp', function ($scope, CommonProp) {
+    .controller('WelcomeCtrl', ['$scope', 'CommonProp', '$firebaseArray', function ($scope, CommonProp, $firebaseArray) {
         $scope.username = CommonProp.getUser();
-    }]);
+
+        var firebaseObj = new Firebase('https://blogging-app.firebaseio.com/Articles');
+        $scope.articles = $firebaseArray(firebaseObj);
+
+    } ]);
 
 })();

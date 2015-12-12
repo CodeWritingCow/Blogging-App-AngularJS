@@ -9,27 +9,31 @@
             templateUrl: 'addPost/addPost.html',
             controller: 'AddPostCtrl'
         });
-    }])
+    } ])
 
-        .controller('AddPostCtrl', ['$scope', function ($scope) {
+        .controller('AddPostCtrl', ['$scope', 'CommonProp', '$location', function ($scope, CommonProp, $location) {
 
             $scope.AddPost = function () {
-                
-                var firebaseObj = new Firebase('https://blogging-app.firebaseio.com');
 
                 var title = $scope.article.title;
                 var post = $scope.article.post;
 
+                var firebaseObj = new Firebase('https://blogging-app.firebaseio.com/Articles');
+
                 firebaseObj.push({
                     title: title,
-                    post: post
-                }).then(function (ref) {
-                    console.log(ref);
+                    post: post,
+                    emailId: CommonProp.getUser()
                 }, function (error) {
-                    console.log('Error:', error);
-                });
-
-            }
-        }]);
+                    if (error) {
+                        console.log('Error:', error);
+                    } else {
+                        console.log('Post uploaded successfully!');
+                        $location.path('/welcome'); // This didn't work before.
+                        $scope.$apply(); // This makes $location work!
+                    }
+                })
+            };
+        } ]);
 
 })();

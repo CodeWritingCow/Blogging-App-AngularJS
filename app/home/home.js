@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    angular.module('myApp.home', ['ngRoute', 'firebase'])
+    angular.module('myApp.home', ['ngRoute'])
 
     // Declared route
     .config(['$routeProvider', function ($routeProvider) {
