@@ -35,7 +35,7 @@
                     <p class="list-group-item-text">{{ article.post }}</p>
                     <span class="pull-right">
                         <button class="btn btn-xs btn-info" ng-click="editPost(article.$id)" data-target="#editModal">EDIT</button>
-                        <button class="btn btn-xs btn-warning">DELETE</button>
+                        <button class="btn btn-xs btn-warning" data-toggle="modal" data-target="#deleteModal">DELETE</button>
                     </span>
                 </a>
             </div>
@@ -65,6 +65,21 @@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                         <button type="button" class="btn btn-primary" ng-click="update()">Publish</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal window asking users to confirm deletion of a post -->
+        <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header" style="text-align: center;">
+                        <h4 class="modal-title" style="color: red;" id="deleteModalLabel">Delete this post permanently?</h4>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-primary" ng-click="update()">Delete</button>
                     </div>
                 </div>
             </div>
