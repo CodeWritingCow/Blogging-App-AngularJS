@@ -38,7 +38,25 @@
             }, function (error) {
                 console.log('error:', error);
             });
+        };
+
+        $scope.confirmDelete = function (id) {
+            var fb = new Firebase("https://blogging-app.firebaseio.com/Articles/" + id);
+            var article = $firebaseObject(fb); // Outdated tutorial says "var article = $firebase(fb);"
+            $scope.postToDelete = article; // and "$scope.postToDelete = article.$asObject();"
+            $('#deleteModal').modal();
+        };
+
+        $scope.deletePost = function () {
+            var fb = new Firebase("https://blogging-app.firebaseio.com/Articles/" + $scope.postToDelete.$id);
+            var article = $firebaseObject(fb);
+            article.$remove().then(function (ref) {
+                $('#deleteModal').modal('hide');
+            }, function (error) {
+                console.log('Error:', error);
+            });
         }
+
     }]);
 
 })();
