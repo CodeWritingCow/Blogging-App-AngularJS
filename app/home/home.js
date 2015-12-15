@@ -9,7 +9,7 @@
             templateUrl: 'home/home.html',
             controller: 'HomeCtrl'
         });
-    } ])
+    }])
 
     // Home controller
     .controller('HomeCtrl', ['$scope', '$location', 'CommonProp', '$firebaseAuth', function ($scope, $location, CommonProp, $firebaseAuth) {
@@ -24,7 +24,7 @@
             var username = $scope.user.email;
             var password = $scope.user.password;
 
-            login.loading = true;
+            login.loading = true; // Turns on Ladda loading indicator
 
             loginObj.$authWithPassword({
                 email: username,
@@ -35,10 +35,10 @@
                 console.log('Authentication successful');
                 $location.path('/welcome');
                 CommonProp.setUser(user.password.email);
-                login.loading = false;
+                login.loading = false; // Turns off Ladda loading indicator
             }, function (error) {
                 // Failure callback
-                login.loading = false;
+                login.loading = false; // Turns off Ladda loading indicator
                 console.log('Authentication failure');
             });
         }
@@ -58,6 +58,7 @@
         };
     })
 
+    // Directive for Ladda loading indicator for buttons
     .directive('laddaLoading', [
         function () {
             return {
