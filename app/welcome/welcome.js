@@ -15,7 +15,7 @@
         $scope.username = CommonProp.getUser();
 
         var firebaseObj = new Firebase('https://blogging-app.firebaseio.com/Articles');
-        $scope.articles = $firebaseArray(firebaseObj);
+        $scope.articles = $firebaseArray(firebaseObj.startAt($scope.username).endAt($scope.username));
 
         $scope.editPost = function (id) {
             var firebaseObj = new Firebase('https://blogging-app.firebaseio.com/Articles/' + id);
