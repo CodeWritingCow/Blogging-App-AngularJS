@@ -37,6 +37,11 @@
                     }
                 })
             };
+
+            $scope.logout = function () {
+                CommonProp.logoutUser();
+            }
+
         } ]);
 
 })();

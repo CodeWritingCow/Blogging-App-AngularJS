@@ -9,7 +9,7 @@
             templateUrl: 'welcome/welcome.html',
             controller: 'WelcomeCtrl'
         });
-    }])
+    } ])
 
     .controller('WelcomeCtrl', ['$scope', 'CommonProp', '$firebaseArray', '$firebaseObject', function ($scope, CommonProp, $firebaseArray, $firebaseObject) {
         $scope.username = CommonProp.getUser();
@@ -55,8 +55,12 @@
             }, function (error) {
                 console.log('Error:', error);
             });
+        };
+
+        $scope.logout = function () {
+            CommonProp.logoutUser();
         }
 
-    }]);
+    } ]);
 
 })();

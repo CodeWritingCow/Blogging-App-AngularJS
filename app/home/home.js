@@ -45,8 +45,10 @@
 
     }])
 
-    .service('CommonProp', function () {
+    .service('CommonProp', ['$location', '$firebaseAuth', function ($location, $firebaseAuth) {
         var user = '';
+        var firebaseObj = new Firebase("https://blogging-app.firebaseio.com");
+        var loginObj = $firebaseAuth(firebaseObj);
 
         return {
             getUser: function () {
@@ -54,9 +56,14 @@
             },
             setUser: function (value) {
                 user = value;
+            },
+            logoutUser: function (){
+                loginObj.$unauth();
+                console.log('done logout');
+                $location.path('/home');
             }
         };
-    })
+    }])
 
     // Directive for Ladda loading indicator for buttons
     .directive('laddaLoading', [
