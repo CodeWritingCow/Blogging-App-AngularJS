@@ -12,6 +12,10 @@
     } ])
 
         .controller('AddPostCtrl', ['$scope', 'CommonProp', '$location', function ($scope, CommonProp, $location) {
+            
+            if (!CommonProp.getUser()) {
+                $location.path('/home');
+                }
 
             $scope.AddPost = function () {
 

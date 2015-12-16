@@ -11,8 +11,12 @@
         });
     } ])
 
-    .controller('WelcomeCtrl', ['$scope', 'CommonProp', '$firebaseArray', '$firebaseObject', function ($scope, CommonProp, $firebaseArray, $firebaseObject) {
+    .controller('WelcomeCtrl', ['$scope', 'CommonProp', '$firebaseArray', '$firebaseObject', '$location', function ($scope, CommonProp, $firebaseArray, $firebaseObject, $location) {
         $scope.username = CommonProp.getUser();
+
+        if (!$scope.username) {
+            $location.path('/home');
+        }
 
         var firebaseObj = new Firebase('https://blogging-app.firebaseio.com/Articles');
         $scope.articles = $firebaseArray(firebaseObj.startAt($scope.username).endAt($scope.username));
