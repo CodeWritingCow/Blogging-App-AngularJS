@@ -52,13 +52,19 @@
 
         return {
             getUser: function () {
+                if (user == '') {
+                    user = localStorage.getItem('userEmail');
+                }
                 return user;
             },
             setUser: function (value) {
+                localStorage.setItem("userEmail", value);
                 user = value;
             },
-            logoutUser: function (){
+            logoutUser: function () {
                 loginObj.$unauth();
+                user = '';
+                localStorage.removeItem('userEmail');
                 console.log('done logout');
                 $location.path('/home');
             }
