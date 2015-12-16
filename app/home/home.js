@@ -9,7 +9,7 @@
             templateUrl: 'home/home.html',
             controller: 'HomeCtrl'
         });
-    }])
+    } ])
 
     // Home controller
     .controller('HomeCtrl', ['$scope', '$location', 'CommonProp', '$firebaseAuth', function ($scope, $location, CommonProp, $firebaseAuth) {
@@ -41,7 +41,15 @@
                 login.loading = false; // Turns off Ladda loading indicator
                 console.log('Authentication failure');
             });
-        }
+        };
+
+        loginObj.$onAuth(function (authData) {
+            // Fire when authentication state occurs
+            if (authData) {
+                CommonProp.setUser(authData.password.email);
+                $location.path('/welcome');
+            }
+        });
 
     }])
 
@@ -69,7 +77,7 @@
                 $location.path('/home');
             }
         };
-    }])
+    } ])
 
     // Directive for Ladda loading indicator for buttons
     .directive('laddaLoading', [
