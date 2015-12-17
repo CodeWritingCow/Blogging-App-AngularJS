@@ -2,15 +2,16 @@
     'use strict';
 
     // Declare app level module which depends on views, and components
-    angular.module('myApp', [
+    var app = angular.module('myApp', [
     'firebase',
     'ngRoute',
     'myApp.home',
     'myApp.register',
     'myApp.welcome',
     'myApp.addPost'     // Newly added module
-    ])
-    .config(['$routeProvider', function ($routeProvider) {
+    ]);
+
+    app.config(['$routeProvider', function ($routeProvider) {
         // Set default view of app to home
 
         $routeProvider.otherwise({
@@ -18,5 +19,21 @@
         });
 
     }]);
+
+    /* Directive lets users pass function in on an enter key to do what we want.
+       Code from https://gist.github.com/EpokK/5884263 */
+    app.directive('ngEnter', function () {
+        return function (scope, element, attrs) {
+            element.bind('keydown keypress', function (event) {
+                if (event.which === 13) {
+                    scope.$apply(function () {
+                        scope.$eval(attrs.ngEnter || attrs.ngClick, {$event:event});
+                    });
+
+                    event.preventDefault();
+                }
+            });
+        };
+    });
 
 })();
