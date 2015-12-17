@@ -26,9 +26,8 @@
                 var email = $scope.user.email;
                 var password = $scope.user.password;
 
-                login.loading = true;
-
                 if (email && password) {
+                    login.loading = true; // Turns on Ladda loading indicator
                     auth.$createUser({
                         email: email,
                         password: password
